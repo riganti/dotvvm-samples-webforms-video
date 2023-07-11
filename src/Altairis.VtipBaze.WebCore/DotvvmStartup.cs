@@ -1,3 +1,4 @@
+using Altairis.VtipBaze.Data;
 using DotVVM.Adapters.WebForms;
 using DotVVM.Framework.Configuration;
 using DotVVM.Framework.ResourceManagement;
@@ -21,6 +22,7 @@ namespace Altairis.VtipBaze.WebCore
         private void ConfigureRoutes(DotvvmConfiguration config, string applicationPath)
         {
             // register routes   
+            config.RouteTable.Add("TagList", "tags", "Views/TagList.dothtml");
             config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));    
         }
 
@@ -42,6 +44,8 @@ namespace Altairis.VtipBaze.WebCore
 		public void ConfigureServices(IDotvvmServiceCollection options)
         {
             options.AddDefaultTempStorages("temp");
-		}
+
+            options.Services.AddScoped<VtipBazeContext>();
+        }
     }
 }

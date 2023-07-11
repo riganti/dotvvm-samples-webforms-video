@@ -1,0 +1,24 @@
+﻿@viewModel Altairis.VtipBaze.WebCore.ViewModels.TagListViewModel, Altairis.VtipBaze.WebCore
+@masterPage Views/Site.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+
+    <article>
+        <header>
+            List of categories
+        </header>
+        <dot:Repeater DataSource="{value: Tags}"
+                      WrapperTagName="ul"
+                      class="taglist">
+
+            <li>
+                <span class="ui-icon ui-icon-tag"></span>
+                <webforms:HybridRouteLink RouteName="TagSearch" Param-TagName="{value: TagName}">{{value: TagName}}</webforms:HybridRouteLink>
+                {{value: $"({JokesCount})"}}
+            </li>
+
+        </dot:Repeater>
+    </article>
+
+</dot:Content>
+

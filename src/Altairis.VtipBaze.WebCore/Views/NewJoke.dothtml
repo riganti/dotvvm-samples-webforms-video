@@ -1,0 +1,34 @@
+﻿@viewModel Altairis.VtipBaze.WebCore.ViewModels.NewJokeViewModel, Altairis.VtipBaze.WebCore
+@masterPage Views/Site.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+
+    <article>
+        <header>
+            Add your joke
+        </header>
+        <dot:PlaceHolder IncludeInPage="{value: Step == 0}">
+            <p>
+                Here you can submit your own joke. It will appear on the site after it's approved by the editor.
+            </p>
+            <p>
+                <dot:TextBox Type="MultiLine" 
+                             style-width="100%" 
+                             style-height="200px"
+                             Text="{value: JokeText}" />
+            </p>
+            <dot:ValidationSummary />
+            <p>
+                <dot:Button Text="Submit" Click="{command: Submit()}" />
+            </p>
+        </dot:PlaceHolder>
+        <dot:PlaceHolder IncludeInPage="{value: Step == 1}">
+            <p>
+                Your joke was added to the database. It will be published after it's approved by the editor. Thank you.
+            </p>
+        </dot:PlaceHolder>
+    </article>
+
+
+</dot:Content>
+
