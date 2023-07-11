@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Altairis.VtipBaze.WebCore.Pages.Site" ViewStateMode="Disabled" %>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+    <link rel="stylesheet" type="text/css" href="//ajax.aspnetcdn.com/ajax/jquery.ui/1.10.3/themes/south-street/jquery-ui.css" />
+    <asp:PlaceHolder runat="server">
+        <%: System.Web.Optimization.Styles.Render("~/Styles/css") %>
+    </asp:PlaceHolder>
+    <link rel="alternate" type="application/atom+xml" href="/feed.xml" />
+    <meta name="author" content="Michal A. Valášek (www.rider.cz), Altairis (www.altairis.cz)" />
+    <meta name="description" content="Databáze vtipů bez reklam" />
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-172431-17']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager runat="server" EnableCdn="true" AjaxFrameworkMode="Disabled">
+            <Scripts>
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="jquery.ui.combined" />
+                <asp:ScriptReference Name="site" />
+            </Scripts>
+        </asp:ScriptManager>
+        <header>
+            <div>
+                <b>VTIP</b>BÁZE<span>.CZ</span>
+            </div>
+            <nav class="ui-widget-header ui-corner-all">
+                <asp:HyperLink runat="server" NavigateUrl='<%$ RouteUrl: RouteName=HomePage, PageIndex=1 %>' Text="Nejnovější" />
+                <asp:HyperLink runat="server" NavigateUrl="<%$ RouteUrl: RouteName=TagList %>" Text="Témata" />
+                <asp:HyperLink runat="server" NavigateUrl="<%$ RouteUrl: RouteName=NewJoke %>" Text="Přidat" />
+                <asp:LoginView runat="server">
+                    <LoggedInTemplate>
+                        <asp:HyperLink runat="server" NavigateUrl="<%$ RouteUrl: RouteName=AdminHomePage, PageIndex=1 %>" Text="Administrace" />
+                        <asp:LoginStatus runat="server" LogoutText="Odhlášení" data-confirmprompt="Opravdu se chcete odhlásit?" />
+                    </LoggedInTemplate>
+                </asp:LoginView>
+            </nav>
+        </header>
+        <asp:ContentPlaceHolder ID="MainCPH" runat="server" />
+        <footer class="ui-widget-header ui-corner-all">
+            <ul>
+                <li>Copyright © <a href="http://www.rider.cz/?utm_medium=footerlink&amp;utm_source=vtipbaze">Michal A. Valášek</a> - <a href="http://www.altairis.cz/?utm_medium=footerlink&amp;utm_source=vtipbaze">Altairis</a>, 2011-2014</li>
+                <li>running on <a href="http://www.asp.net">ASP.NET 4.5</a> &amp; <a href="http://www.iis.net/">IIS 8</a></li>
+                <li>
+                    <a href="/feed.xml">RSS/ATOM</a>
+                </li>
+                <%--<li>
+                    <a href="http://vtipbaze.codeplex.com">zdrojové kódy</a>
+                </li>--%>
+                <li>
+                    <a href="/admin">&pi;</a>
+                </li>
+            </ul>
+        </footer>
+    </form>
+</body>
+</html>
