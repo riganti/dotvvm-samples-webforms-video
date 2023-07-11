@@ -4,15 +4,18 @@ using Altairis.Web;
 using System.Web.Optimization;
 using System.Web.UI;
 
-namespace Altairis.VtipBaze.WebCore {
-    public class Global : System.Web.HttpApplication {
+namespace Altairis.VtipBaze.WebCore
+{
+    public class Global : System.Web.HttpApplication
+    {
 
-        protected void Application_Start(object sender, EventArgs e) {
+        protected void Application_Start(object sender, EventArgs e)
+        {
             // Enable JS + CSS bundling
             BundleTable.Bundles.Add(new StyleBundle("~/Styles/css").IncludeDirectory("~/Styles", "*.css"));
             BundleTable.Bundles.Add(new ScriptBundle("~/Scripts/Site/js").IncludeDirectory("~/Scripts/Site", "*.js"));
             ScriptManager.ScriptResourceMapping.AddDefinition("site", new ScriptResourceDefinition { Path = "~/Scripts/Site/js" });
-            
+
             // Setup URL routing
             RouteTable.Routes.MapPageRoute("HomePage", "{PageIndex}", "~/Pages/HomePage.aspx", false,
                 new RouteValueDictionary(new { PageIndex = "1" }),              // defaults

@@ -4,36 +4,44 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Altairis.VtipBaze.Data;
 
-namespace Altairis.VtipBaze.WebCore.Pages {
-    public partial class HomePage : System.Web.UI.Page {
+namespace Altairis.VtipBaze.WebCore.Pages
+{
+    public partial class HomePage : System.Web.UI.Page
+    {
         private VtipBazeContext DataContext = new VtipBazeContext();
         private string RouteName { get; set; }
 
-        protected void Page_Init(object sender, EventArgs e) {
+        protected void Page_Init(object sender, EventArgs e)
+        {
             this.RouteName = (this.RouteData.DataTokens["RouteName"] as string) ?? string.Empty;
         }
 
-        public IQueryable<Joke> SelectJokes() {
+        public IQueryable<Joke> SelectJokes()
+        {
             // Vybrat všechny vtipy s odpovídajícím stavem schválení
             var q = this.DataContext.Jokes.AsQueryable();
 
-            if (this.RouteName.Equals("HomePage")) {
+            if (this.RouteName.Equals("HomePage"))
+            {
                 // HomePage
                 q = q.Where(x => x.Approved);
                 this.WelcomePlaceHolder.Visible = true;
             }
-            else if (this.RouteName.Equals("SingleJoke")) {
+            else if (this.RouteName.Equals("SingleJoke"))
+            {
                 // Jeden vtip
                 var jokeId = int.Parse(this.RouteData.Values["JokeId"] as string);
                 q = q.Where(x => x.JokeId == jokeId);
                 if (!this.Request.IsAuthenticated) q = q.Where(x => x.Approved);
-                this.PagingPanel.Visible = false;            
+                this.PagingPanel.Visible = false;
             }
-            else if (this.RouteName.Equals("AdminHomePage")) {
+            else if (this.RouteName.Equals("AdminHomePage"))
+            {
                 // Neschválené vtipy
                 q = q.Where(x => !x.Approved);
             }
-            else if (this.RouteName.Equals("TagSearch")) {
+            else if (this.RouteName.Equals("TagSearch"))
+            {
                 // Vyhledávání podle tagů
                 var tagName = this.RouteData.Values["TagName"] as string;
                 if (!string.IsNullOrWhiteSpace(tagName)) q = q.Where(x => x.Tags.Any(t => t.TagName.Equals(tagName)));
@@ -43,9 +51,11 @@ namespace Altairis.VtipBaze.WebCore.Pages {
             return q.OrderByDescending(x => x.DateCreated);
         }
 
-        protected void JokesList_ItemCommand(object sender, ListViewCommandEventArgs e) {
+        protected void JokesList_ItemCommand(object sender, ListViewCommandEventArgs e)
+        {
             var jokeId = int.Parse(e.CommandArgument as string);
-            if (e.CommandName.Equals("AddTag")) {
+            if (e.CommandName.Equals("AddTag"))
+            {
                 var textbox = (e.CommandSource as Control).NamingContainer.FindControl("TextBoxNewTag") as TextBox;
                 var tagText = textbox.Text.Trim().ToLower();
                 if (string.IsNullOrWhiteSpace(tagText)) return;
@@ -60,17 +70,20 @@ namespace Altairis.VtipBaze.WebCore.Pages {
 
                 this.DataContext.SaveChanges();
             }
-            else if (e.CommandName.Equals("ClearTags")) {
+            else if (e.CommandName.Equals("ClearTags"))
+            {
                 var joke = this.DataContext.Jokes.Single(x => x.JokeId == jokeId);
                 joke.Tags.Clear();
                 this.DataContext.SaveChanges();
             }
-            else if (e.CommandName.Equals("Approve")) {
+            else if (e.CommandName.Equals("Approve"))
+            {
                 var joke = this.DataContext.Jokes.Single(x => x.JokeId == jokeId);
                 joke.Approved = true;
                 this.DataContext.SaveChanges();
             }
-            else if (e.CommandName.Equals("Reject")) {
+            else if (e.CommandName.Equals("Reject"))
+            {
                 var joke = this.DataContext.Jokes.Single(x => x.JokeId == jokeId);
                 this.DataContext.Jokes.Remove(joke);
                 this.DataContext.SaveChanges();

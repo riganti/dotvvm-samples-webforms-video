@@ -4,9 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
-namespace Altairis.VtipBaze.Data {
+namespace Altairis.VtipBaze.Data
+{
 
-    public class Tag {
+    public class Tag
+    {
 
         [Key]
         [RegularExpression(@"^\w+$")]

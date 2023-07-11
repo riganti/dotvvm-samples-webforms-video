@@ -1,10 +1,10 @@
-﻿<%@ Page Title="Témata" Language="C#" MasterPageFile="~/Pages/Site.Master" AutoEventWireup="true" CodeBehind="TagList.aspx.cs" Inherits="Altairis.VtipBaze.WebCore.Pages.TagList" %>
+﻿<%@ Page Title="Categories" Language="C#" MasterPageFile="~/Pages/Site.Master" AutoEventWireup="true" CodeBehind="TagList.aspx.cs" Inherits="Altairis.VtipBaze.WebCore.Pages.TagList" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainCPH" runat="server">
     <asp:ListView runat="server" ItemType="Altairis.VtipBaze.Data.Tag" SelectMethod="SelectTags">
         <LayoutTemplate>
             <article>
                 <header>
-                    <asp:Localize runat="server" Text="Seznam dostupných témat" />
+                    List of categories
                 </header>
                 <ul class="taglist">
                     <asp:PlaceHolder ID="ItemPlaceHolder" runat="server" />

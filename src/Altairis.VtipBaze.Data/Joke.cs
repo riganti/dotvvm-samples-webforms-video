@@ -5,12 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Altairis.VtipBaze.Data {
-    public class Joke {
+namespace Altairis.VtipBaze.Data
+{
+    public class Joke
+    {
 
-        public Joke() {
+        public Joke()
+        {
             this.DateCreated = DateTime.Now;
-        } 
+        }
 
         [Key]
         public int JokeId { get; set; }
