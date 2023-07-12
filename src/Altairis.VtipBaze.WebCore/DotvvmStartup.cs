@@ -22,7 +22,13 @@ namespace Altairis.VtipBaze.WebCore
         private void ConfigureRoutes(DotvvmConfiguration config, string applicationPath)
         {
             // register routes   
+            config.RouteTable.Add("HomePage", "{PageIndex?:int}", "Views/HomePage.dothtml");
+            config.RouteTable.Add("SingleJoke", "joke/{JokeId:int}", "Views/HomePage.dothtml");
+            config.RouteTable.Add("TagSearch", "tags/{TagName}/{PageIndex?:int}", "Views/HomePage.dothtml", new { PageIndex = 1 });
+            config.RouteTable.Add("AdminHomePage", "admin/{PageIndex?:int}", "Views/HomePage.dothtml", new { PageIndex = 1 });
+            config.RouteTable.Add("NewJoke", "new", "Views/NewJoke.dothtml");
             config.RouteTable.Add("TagList", "tags", "Views/TagList.dothtml");
+            config.RouteTable.Add("Login", "login", "Views/Login.dothtml");
             config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));    
         }
 
