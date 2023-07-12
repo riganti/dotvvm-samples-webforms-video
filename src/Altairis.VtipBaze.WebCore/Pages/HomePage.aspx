@@ -29,7 +29,7 @@
                     <asp:LinkButton Text="[reject]" ToolTip="Reject joke" runat="server" CssClass="ui-icon ui-icon-closethick" CommandName="Reject" CommandArgument="<%# Item.JokeId %>" data-confirmprompt="Do you really want to delete this joke?" />
                     This joke was not approved yet.
                 </asp:Panel>
-                <my:WikiPlexLiteral Text="<%# Item.Text %>" runat="server" />
+                <%#: Item.Text %>
                 <aside>
                     <asp:Panel runat="server" DefaultButton="AddTagButton" Style="float: right" Visible="<%# this.Request.IsAuthenticated %>">
                         <asp:TextBox ID="TextBoxNewTag" runat="server" Width="120px" CssClass="textbox ac-tag" />

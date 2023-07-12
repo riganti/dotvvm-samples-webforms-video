@@ -18,18 +18,15 @@ namespace Altairis.VtipBaze.WebCore.Pages
 
         public IQueryable<Joke> SelectJokes()
         {
-            // Vybrat všechny vtipy s odpovídajícím stavem schválení
             var q = this.DataContext.Jokes.AsQueryable();
 
             if (this.RouteName.Equals("HomePage"))
             {
-                // HomePage
                 q = q.Where(x => x.Approved);
                 this.WelcomePlaceHolder.Visible = true;
             }
             else if (this.RouteName.Equals("SingleJoke"))
             {
-                // Jeden vtip
                 var jokeId = int.Parse(this.RouteData.Values["JokeId"] as string);
                 q = q.Where(x => x.JokeId == jokeId);
                 if (!this.Request.IsAuthenticated) q = q.Where(x => x.Approved);
@@ -37,17 +34,14 @@ namespace Altairis.VtipBaze.WebCore.Pages
             }
             else if (this.RouteName.Equals("AdminHomePage"))
             {
-                // Neschválené vtipy
                 q = q.Where(x => !x.Approved);
             }
             else if (this.RouteName.Equals("TagSearch"))
             {
-                // Vyhledávání podle tagů
                 var tagName = this.RouteData.Values["TagName"] as string;
                 if (!string.IsNullOrWhiteSpace(tagName)) q = q.Where(x => x.Tags.Any(t => t.TagName.Equals(tagName)));
             }
 
-            // Vrátit seřazené podle datumu
             return q.OrderByDescending(x => x.DateCreated);
         }
 
@@ -60,11 +54,9 @@ namespace Altairis.VtipBaze.WebCore.Pages
                 var tagText = textbox.Text.Trim().ToLower();
                 if (string.IsNullOrWhiteSpace(tagText)) return;
 
-                // Najít existující tag nebo vytvořit nový
                 var tag = this.DataContext.Tags.SingleOrDefault(x => x.TagName.Equals(tagText));
                 if (tag == null) tag = this.DataContext.Tags.Add(new Tag { TagName = tagText });
 
-                // Najít vtip a přidat k němu tag
                 var joke = this.DataContext.Jokes.Single(x => x.JokeId == jokeId);
                 joke.Tags.Add(tag);
 

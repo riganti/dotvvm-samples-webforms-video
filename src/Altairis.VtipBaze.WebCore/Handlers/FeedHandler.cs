@@ -26,7 +26,7 @@ namespace Altairis.VtipBaze.WebCore.Handlers
             {
                 Id = baseUri.ToString(),
                 Title = new TextSyndicationContent("VTIPBÁZE.CZ"),
-                Description = new TextSyndicationContent("Nejnovější vtipy"),
+                Description = new TextSyndicationContent("Newest jokes"),
                 Items = GetFeedItems(baseUri)
             };
             feed.Links.Add(new SyndicationLink(baseUri));
@@ -40,7 +40,6 @@ namespace Altairis.VtipBaze.WebCore.Handlers
 
         public IEnumerable<SyndicationItem> GetFeedItems(Uri baseUri)
         {
-            var engine = new WikiPlex.WikiEngine();
             using (var dc = new VtipBazeContext())
             {
                 foreach (var j in dc.Jokes.Where(x => x.Approved).OrderByDescending(x => x.DateCreated).Take(10))
@@ -51,7 +50,7 @@ namespace Altairis.VtipBaze.WebCore.Handlers
                     var si = new SyndicationItem
                     {
                         Title = new TextSyndicationContent(j.DateCreated.ToString()),
-                        Content = new TextSyndicationContent(engine.Render(j.Text), TextSyndicationContentKind.Html),
+                        Content = new TextSyndicationContent(j.Text, TextSyndicationContentKind.Plaintext),
                         PublishDate = j.DateCreated,
                         LastUpdatedTime = j.DateCreated,
                         Id = itemUri.Uri.ToString(),
