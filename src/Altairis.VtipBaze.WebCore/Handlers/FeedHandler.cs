@@ -2,26 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel.Syndication;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web;
 using Altairis.VtipBaze.Data;
 using Altairis.Web;
+using DotVVM.Framework.Hosting;
+using Microsoft.Net.Http.Headers;
 
 namespace Altairis.VtipBaze.WebCore.Handlers
 {
-    public class FeedHandler : IHttpHandler
+    public class FeedHandler : IDotvvmPresenter 
     {
 
-        public bool IsReusable
+        public Task ProcessRequest(IDotvvmRequestContext context)
         {
-            get { return true; }
-        }
+            context.HttpContext.Response.ContentType = "application/atom+xml";
+            context.HttpContext.Response.Headers["Cache-Control"] = "private";
+            context.HttpContext.Response.Headers["Expires"] = DateTime.Now.AddMinutes(30).ToString("R");
 
-        public void ProcessRequest(HttpContext context)
-        {
-            context.Response.ContentType = "application/atom+xml";
-            context.Response.Cache.SetCacheability(HttpCacheability.ServerAndPrivate);
-            context.Response.Cache.SetExpires(DateTime.Now.AddMinutes(30));
-            var baseUri = context.Request.ApplicationBaseUri();
+            var baseUri = new Uri(context.GetApplicationBaseUri());
             var feed = new SyndicationFeed
             {
                 Id = baseUri.ToString(),
@@ -30,12 +30,14 @@ namespace Altairis.VtipBaze.WebCore.Handlers
                 Items = GetFeedItems(baseUri)
             };
             feed.Links.Add(new SyndicationLink(baseUri));
-            using (var xw = new System.Xml.XmlTextWriter(context.Response.Output))
+            using (var xw = new System.Xml.XmlTextWriter(context.HttpContext.Response.Body, Encoding.UTF8))
             {
                 xw.Formatting = System.Xml.Formatting.Indented;
                 var ff = new Atom10FeedFormatter(feed);
                 ff.WriteTo(xw);
             }
+
+            return Task.CompletedTask;
         }
 
         public IEnumerable<SyndicationItem> GetFeedItems(Uri baseUri)
@@ -64,6 +66,5 @@ namespace Altairis.VtipBaze.WebCore.Handlers
                 }
             }
         }
-
     }
 }

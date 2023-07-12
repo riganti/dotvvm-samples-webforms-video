@@ -36,8 +36,8 @@ namespace Altairis.VtipBaze.WebCore
             RouteTable.Routes.MapPageRoute("NewJoke", "new", "~/Pages/NewJoke.aspx");
             RouteTable.Routes.MapPageRoute("TagList", "tags", "~/Pages/TagList.aspx");
             RouteTable.Routes.MapPageRoute("Login", "login", "~/Pages/Login.aspx");
-            RouteTable.Routes.MapHttpHandler<Handlers.TagListHandler>("tags.txt");
-            RouteTable.Routes.MapHttpHandler<Handlers.FeedHandler>("feed.xml");
+            //RouteTable.Routes.MapHttpHandler<Handlers.TagListHandler>("tags.txt");
+            //RouteTable.Routes.MapHttpHandler<Handlers.FeedHandler>("feed.xml");
         }
 
     }

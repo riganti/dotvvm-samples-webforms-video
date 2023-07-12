@@ -1,4 +1,5 @@
 using Altairis.VtipBaze.Data;
+using Altairis.VtipBaze.WebCore.Handlers;
 using DotVVM.Adapters.WebForms;
 using DotVVM.Framework.Configuration;
 using DotVVM.Framework.ResourceManagement;
@@ -29,6 +30,7 @@ namespace Altairis.VtipBaze.WebCore
             config.RouteTable.Add("NewJoke", "new", "Views/NewJoke.dothtml");
             config.RouteTable.Add("TagList", "tags", "Views/TagList.dothtml");
             config.RouteTable.Add("Login", "login", "Views/Login.dothtml");
+            config.RouteTable.Add("Feed", "feed.xml", _ => new FeedHandler());
             config.RouteTable.AutoDiscoverRoutes(new DefaultRouteStrategy(config));    
         }
 
