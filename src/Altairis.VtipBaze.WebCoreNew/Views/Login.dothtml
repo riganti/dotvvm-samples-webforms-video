@@ -1,0 +1,43 @@
+﻿@viewModel Altairis.VtipBaze.WebCore.ViewModels.LoginViewModel, Altairis.VtipBaze.WebCore
+@masterPage Views/Site.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+    <article>
+        <header>
+            Sign In
+        </header>
+        <form>
+            <p Visible="{value: IsError}">
+                <b>Error:</b> Sign in failed.
+            </p>
+
+            <div class="form">
+                <p>
+                    <label for="UserName">User name</label>
+                    <br />
+                    <dot:TextBox id="UserName" style-width="100%" Text="{value: UserName}" />
+                </p>
+                <p>
+                    <label for="Password">Password</label>
+                    <br />
+                    <dot:TextBox id="Password" Type="Password" style-width="100%" Text="{value: Password}" />
+                </p>
+                <p>
+                    <dot:CheckBox id="RememberMe" Text="remember me at this machine" Checked="{value: RememberMe}" />
+                </p>
+                <dot:ValidationSummary runat="server" />
+                
+                <p class="buttons">
+                    <dot:Button ID="LoginButton" 
+                                IsSubmitButton="true" 
+                                Text="Sign In" 
+                                Click="{command: SignIn()}" />
+                </p>
+            </div>
+        </form>
+
+        
+    </article>
+
+</dot:Content>
+
