@@ -40,6 +40,15 @@ namespace Altairis.VtipBaze.WebCore.ViewModels
             this.dbContext = dbContext;
         }
 
+        public override async Task Init()
+        {
+            if (this.Context.Route.RouteName.Equals("AdminHomePage"))
+            {
+                await Context.Authorize();
+            } 
+            await base.Init();
+        }
+
         public override Task PreRender()
         {
             Jokes = new GridViewDataSet<JokeListModel>()
@@ -107,7 +116,8 @@ namespace Altairis.VtipBaze.WebCore.ViewModels
             var tag = this.dbContext.Tags.SingleOrDefault(x => x.TagName.Equals(tagText));
             if (tag == null)
             {
-                tag = this.dbContext.Tags.Add(new Tag { TagName = tagText });
+                tag = new Tag { TagName = tagText };
+                this.dbContext.Tags.Add(tag);
             }
 
             var joke = this.dbContext.Jokes.Single(x => x.JokeId == jokeId);

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Security;
 using DotVVM.Framework.ViewModel;
-using DotVVM.Framework.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Altairis.VtipBaze.WebCore.ViewModels
 {
@@ -13,11 +13,12 @@ namespace Altairis.VtipBaze.WebCore.ViewModels
     {
         public abstract string PageTitle { get; }
 
-        public void SignOut()
+        public async Task SignOut()
         {
-            // TODO: change to ASP.NET Core equivalent
-            FormsAuthentication.SignOut();
-            Context.RedirectToLocalUrl("/");
+            var signInManager = Context.Services.GetRequiredService<SignInManager<IdentityUser>>();
+            await signInManager.SignOutAsync();
+            
+            Context.RedirectToRoute("HomePage");
         }
     }
 }

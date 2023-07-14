@@ -33,6 +33,19 @@ namespace Altairis.VtipBaze.WebCore
             services.AddAuthentication();
 
             services.AddDotVVM<DotvvmStartup>();
+            services.AddSignalR();
+
+            services.AddDbContext<VtipBazeContext>(options =>
+            {
+                options.UseSqlServer("Data Source=.\\SQLEXPRESS; Initial Catalog=VtipBaze; Integrated Security=true; Trust Server Certificate=true");
+            });
+            
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<VtipBazeContext>();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Login";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -4,14 +4,16 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Security;
 using DotVVM.Framework.ViewModel;
 using DotVVM.Framework.Hosting;
+using Microsoft.AspNetCore.Identity;
 
 namespace Altairis.VtipBaze.WebCore.ViewModels
 {
     public class LoginViewModel : SiteViewModel
     {
+        private readonly SignInManager<IdentityUser> signInManager;
+
         public override string PageTitle => "Sign In";
 
         [Required(ErrorMessage = "No user name provided")]
@@ -24,17 +26,31 @@ namespace Altairis.VtipBaze.WebCore.ViewModels
 
         public bool IsError { get; set; }
 
-        public void SignIn()
+        [FromQuery("returnUrl")]
+        public string ReturnUrl { get; set; }
+
+        public LoginViewModel(SignInManager<IdentityUser> signInManager)
         {
-            if (!Membership.ValidateUser(UserName, Password))
+            this.signInManager = signInManager;
+        }
+
+        public async Task SignIn()
+        {
+            var result = await signInManager.PasswordSignInAsync(UserName, Password, RememberMe, true);
+            if (!result.Succeeded)
             {
                 IsError = true;
                 return;
             }
 
-            FormsAuthentication.SetAuthCookie(UserName, RememberMe);
-            var url = FormsAuthentication.GetRedirectUrl(UserName, RememberMe);
-            Context.RedirectToUrl(url);
+            if (!string.IsNullOrEmpty(ReturnUrl))
+            {
+                Context.RedirectToLocalUrl(ReturnUrl);
+            }
+            else
+            {
+                Context.RedirectToRoute("AdminHomePage");
+            }
         }
     }
 }

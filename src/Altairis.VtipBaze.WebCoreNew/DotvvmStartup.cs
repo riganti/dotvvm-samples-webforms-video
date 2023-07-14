@@ -56,8 +56,6 @@ namespace Altairis.VtipBaze.WebCore
         public void ConfigureServices(IDotvvmServiceCollection options)
         {
             options.AddDefaultTempStorages("temp");
-
-            options.Services.AddScoped<VtipBazeContext>();
         }
     }
 }

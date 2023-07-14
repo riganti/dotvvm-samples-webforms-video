@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Security;
 using Altairis.VtipBaze.Data;
 using DotVVM.Framework.ViewModel;
 using DotVVM.Framework.Hosting;
@@ -32,11 +31,12 @@ namespace Altairis.VtipBaze.WebCore.ViewModels
         {
             var isAuthenticated = Context.HttpContext.User.Identity.IsAuthenticated;
 
-            var joke = dbContext.Jokes.Add(new Joke
+            var joke = new Joke
             {
                 Text = JokeText,
                 Approved = isAuthenticated
-            });
+            };
+            dbContext.Jokes.Add(joke);
             dbContext.SaveChanges();
 
             if (isAuthenticated)
@@ -50,8 +50,7 @@ namespace Altairis.VtipBaze.WebCore.ViewModels
                 Step = 1;
 
                 // Send message to users
-                var recipients = from u in Membership.GetAllUsers().Cast<MembershipUser>()
-                    where u.IsApproved
+                var recipients = from u in dbContext.Users 
                     select u.Email;
                 var client = new System.Net.Mail.SmtpClient();
                 var message = new System.Net.Mail.MailMessage()
