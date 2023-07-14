@@ -3,19 +3,27 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
-using System.Web.Security;
 using Altairis.VtipBaze.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Altairis.VtipBaze.Import
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            using (var dc = new VtipBazeContext())
+            var services = new ServiceCollection();
+            services.AddDbContext<VtipBazeContext>(options => options.UseSqlServer("Data Source=.\\SQLEXPRESS; Initial Catalog=VtipBaze; Integrated Security=true; Trust Server Certificate=true"));
+            services.AddIdentityCore<IdentityUser>().AddEntityFrameworkStores<VtipBazeContext>();
+            var serviceProvider = services.BuildServiceProvider();
+
+            await using (var dc = serviceProvider.GetRequiredService<VtipBazeContext>())
             {
-                dc.Database.CreateIfNotExists();
+                await dc.Database.EnsureCreatedAsync();
 
                 // seed data (all jokes were kindly provided by ChatGPT)
                 if (!dc.Tags.Any())
@@ -73,7 +81,7 @@ namespace Altairis.VtipBaze.Import
                             new Joke() { Text = "Why did the politician go to the doctor? He needed a prescription for his addiction to lobbyists' money.", Approved = true },
                         }
                     });
-                    dc.SaveChanges();
+                    await dc.SaveChangesAsync();
 
                     Console.WriteLine("Data seed completed.");
                 }
@@ -82,23 +90,60 @@ namespace Altairis.VtipBaze.Import
                     Console.WriteLine("The database already exists, skipped.");
                 }
 
-                var adminUsers = Membership.FindUsersByName("admin");
-                if (adminUsers.Count == 0)
+                // migrate Users table from ASP.NET membership
+                if (dc.Database.SqlQueryRaw<int>("SELECT COUNT(*) AS Value FROM information_schema.Tables WHERE TABLE_NAME = 'Users'").First() != 0)
                 {
-                    var user = Membership.CreateUser("admin", "admin123", "test@mail.local");
-                    user.IsApproved = true;
-                    Membership.UpdateUser(user);
+                    Console.WriteLine("Migrating old users...");
 
-                    Console.WriteLine("Created admin user.");
+                    var userManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+                    
+                    var oldUsers = dc.Database.SqlQueryRaw<string>(
+                        @"SELECT (
+                            SELECT Users.UserId, Users.UserName, Memberships.Email
+                            FROM Users
+                            JOIN Memberships ON Memberships.UserId = Users.UserId
+                            FOR JSON PATH
+                          ) AS Value")
+                        .First();
+                    foreach (var oldUser in JsonSerializer.Deserialize<OldUser[]>(oldUsers))
+                    {
+                        var entity = new IdentityUser()
+                        {
+                            Id = oldUser.UserId.ToString(),
+                            UserName = oldUser.UserName,
+                            Email = oldUser.Email,
+                            SecurityStamp = Guid.NewGuid().ToString()
+                        };
+                        await userManager.CreateAsync(entity);
+                    }
+
+                    // set password to the admin user
+                    var adminUser = await userManager.FindByNameAsync("admin");
+                    await userManager.AddPasswordAsync(adminUser, "Admin123+");
+                    
+                    // delete old user tables
+                    await dc.Database.ExecuteSqlRawAsync("DROP TABLE Memberships");
+                    await dc.Database.ExecuteSqlRawAsync("DROP TABLE UsersInRoles");
+                    await dc.Database.ExecuteSqlRawAsync("DROP TABLE Profiles");
+                    await dc.Database.ExecuteSqlRawAsync("DROP TABLE Roles");
+                    await dc.Database.ExecuteSqlRawAsync("DROP TABLE Users");
+                    await dc.Database.ExecuteSqlRawAsync("DROP TABLE Applications");
+
+                    Console.WriteLine("Password for admin user reset.");
                 }
                 else
                 {
-                    Console.WriteLine("Admin user already exists, skipped.");
+                    Console.WriteLine("Users already migrated, skipped.");
                 }
             }
         }
+    }
 
-        
+    public class OldUser
+    {
+        public Guid UserId { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
     }
 
 }
