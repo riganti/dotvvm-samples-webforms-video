@@ -39,10 +39,11 @@
                 </div>
                 <div>{{value: Text}}</div>
                 <aside>
-                    <dot:AuthenticatedView IncludeInPage="{value: !Approved}">
+                    <dot:AuthenticatedView>
                         <AuthenticatedTemplate>
                             <div style="float: right">
-                                <dot:TextBox style-width="120px" class="textbox ac-tag" Text="{value: TagToAdd}" />
+                                <dot:TextBox style-width="120px" class="textbox ac-tag" Text="{value: TagToAdd}" list="TagList" />
+
                                 <dot:LinkButton Text="[add]" title="Add tag" class="ui-icon ui-icon-circle-plus"
                                                 Click="{command: _root.AddTag(Id, TagToAdd)}" />
                                 <dot:LinkButton runat="server" Text="[clear all]" title="Clear all tags"
@@ -69,24 +70,28 @@
 
     <div class="paging" IncludeInPage="{value: PagingPanelVisible}">
         <div style="float: left">
-            <dot:RouteLink RouteName="{resource: Context.Route.RouteName}" 
+            <dot:RouteLink RouteName="{resource: Context.Route.RouteName}"
                            Param-PageIndex="1"
                            Text="&lt;&lt; first"
-                           Enabled="{value: !Jokes.PagingOptions.IsFirstPage}"/>
-            <dot:RouteLink RouteName="{resource: Context.Route.RouteName}" 
+                           Enabled="{value: !Jokes.PagingOptions.IsFirstPage}" />
+            <dot:RouteLink RouteName="{resource: Context.Route.RouteName}"
                            Param-PageIndex="{value: PageIndex - 1}"
-                           Text="&lt; previous" 
-                           Enabled="{value: !Jokes.PagingOptions.IsFirstPage}"/>
+                           Text="&lt; previous"
+                           Enabled="{value: !Jokes.PagingOptions.IsFirstPage}" />
         </div>
-        <dot:RouteLink RouteName="{resource: Context.Route.RouteName}" 
+        <dot:RouteLink RouteName="{resource: Context.Route.RouteName}"
                        Param-PageIndex="{value: PageIndex + 1}"
                        Text="next &gt;"
-                       Enabled="{value: !Jokes.PagingOptions.IsLastPage}"/>
-        <dot:RouteLink RouteName="{resource: Context.Route.RouteName}" 
+                       Enabled="{value: !Jokes.PagingOptions.IsLastPage}" />
+        <dot:RouteLink RouteName="{resource: Context.Route.RouteName}"
                        Param-PageIndex="{value: Jokes.PagingOptions.PagesCount}"
                        Text="last &gt;&gt;"
                        Enabled="{value: !Jokes.PagingOptions.IsLastPage}" />
     </div>
+
+    <dot:Repeater WrapperTagName="datalist" DataSource="{value: _root.TagList}" ID="TagList">
+        <option value="{value: _this}"></option>
+    </dot:Repeater>
 
 </dot:Content>
 

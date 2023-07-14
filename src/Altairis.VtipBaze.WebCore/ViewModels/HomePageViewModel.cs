@@ -31,7 +31,10 @@ namespace Altairis.VtipBaze.WebCore.ViewModels
 
         public GridViewDataSet<JokeListModel> Jokes { get; set; }
 
-        [FromRoute("PageIndex")] 
+        public List<string> TagList { get; set; }
+
+
+        [FromRoute("PageIndex")]
         public int PageIndex { get; set; } = 1;
 
         public HomePageViewModel(VtipBazeContext dbContext)
@@ -48,7 +51,16 @@ namespace Altairis.VtipBaze.WebCore.ViewModels
             };
             Jokes.LoadFromQueryable(SelectJokes());
 
+            TagList = SelectTagNames().ToList();
+
             return base.PreRender();
+        }
+
+        public IQueryable<string> SelectTagNames()
+        {
+            return dbContext.Tags
+                .OrderBy(x => x.TagName)
+                .Select(x => x.TagName);
         }
 
         public IQueryable<JokeListModel> SelectJokes()

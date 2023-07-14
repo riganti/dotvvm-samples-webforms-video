@@ -28,7 +28,7 @@ namespace Altairis.VtipBaze.WebCore
         {
             // register routes   
             config.RouteTable.Add("HomePage", "{PageIndex?:int}", "Views/HomePage.dothtml");
-            config.RouteTable.Add("SingleJoke", "joke/{JokeId:int}", "Views/HomePage.dothtml");
+            config.RouteTable.Add("SingleJoke", "joke/{JokeId:int}/{PageIndex?:int}", "Views/HomePage.dothtml", new { PageIndex = 1 });
             config.RouteTable.Add("TagSearch", "tags/{TagName}/{PageIndex?:int}", "Views/HomePage.dothtml", new { PageIndex = 1 });
             config.RouteTable.Add("AdminHomePage", "admin/{PageIndex?:int}", "Views/HomePage.dothtml", new { PageIndex = 1 });
             config.RouteTable.Add("NewJoke", "new", "Views/NewJoke.dothtml");

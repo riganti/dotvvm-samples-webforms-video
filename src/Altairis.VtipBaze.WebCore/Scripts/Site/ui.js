@@ -11,12 +11,4 @@
     $("*[data-confirmprompt]").click(function () {
         return window.confirm($(this).data("confirmprompt"));
     });
-    
-    $.get("/tags.txt", function (data) {
-        $(".ac-tag").autocomplete({
-            source: data.split(","),
-            minLength: 0,
-            delay: 0
-        });
-    });
 });
