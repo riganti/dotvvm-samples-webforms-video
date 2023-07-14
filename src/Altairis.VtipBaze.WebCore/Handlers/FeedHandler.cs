@@ -4,11 +4,8 @@ using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using Altairis.VtipBaze.Data;
-using Altairis.Web;
 using DotVVM.Framework.Hosting;
-using Microsoft.Net.Http.Headers;
 
 namespace Altairis.VtipBaze.WebCore.Handlers
 {

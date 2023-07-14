@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using DotVVM.Framework.ViewModel;
 using DotVVM.Framework.Hosting;
 using Altairis.VtipBaze.Data;
-using Microsoft.Ajax.Utilities;
-using System.Web.UI;
 using Altairis.VtipBaze.WebCore.Models;
 using System;
 using DotVVM.Framework.Controls;
