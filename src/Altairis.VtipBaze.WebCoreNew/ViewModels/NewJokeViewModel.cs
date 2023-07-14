@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using Altairis.VtipBaze.Data;
@@ -14,6 +15,7 @@ namespace Altairis.VtipBaze.WebCore.ViewModels
     public class NewJokeViewModel : SiteViewModel
     {
         private readonly VtipBazeContext dbContext;
+        private readonly SmtpClient smtpClient;
 
         public override string PageTitle => "Add your joke";
         
@@ -22,9 +24,10 @@ namespace Altairis.VtipBaze.WebCore.ViewModels
         [Required(ErrorMessage = "Empty text is not very funny")]
         public string JokeText { get; set; }
 
-        public NewJokeViewModel(VtipBazeContext dbContext)
+        public NewJokeViewModel(VtipBazeContext dbContext, SmtpClient smtpClient)
         {
             this.dbContext = dbContext;
+            this.smtpClient = smtpClient;
         }
 
         public void Submit()
@@ -52,15 +55,15 @@ namespace Altairis.VtipBaze.WebCore.ViewModels
                 // Send message to users
                 var recipients = from u in dbContext.Users 
                     select u.Email;
-                var client = new System.Net.Mail.SmtpClient();
                 var message = new System.Net.Mail.MailMessage()
                 {
+                    From = new MailAddress("info@vtipbaze.cz"),
                     Subject = "New joke to approve",
                     Body = joke.Text + "\r\n\r\nApprove or reject at " + Context.GetApplicationBaseUri() + "admin",
                     IsBodyHtml = false
                 };
                 message.To.Add(string.Join(",", recipients));
-                client.Send(message);
+                smtpClient.Send(message);
             }
         }
     }

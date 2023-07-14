@@ -46,6 +46,13 @@ namespace Altairis.VtipBaze.WebCore
             {
                 options.LoginPath = "/Login";
             });
+
+            services.AddTransient(_ =>
+            {
+                var client = new SmtpClient();
+                Configuration.GetSection("Smtp").Bind(client);
+                return client;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
