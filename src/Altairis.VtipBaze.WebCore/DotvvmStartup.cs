@@ -1,3 +1,4 @@
+using DotVVM.Adapters.WebForms;
 using DotVVM.Framework.Configuration;
 using DotVVM.Framework.Routing;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,8 @@ namespace Altairis.VtipBaze.WebCore
             ConfigureRoutes(config, applicationPath);
             ConfigureControls(config, applicationPath);
             ConfigureResources(config, applicationPath);
+
+            config.AddWebFormsAdapters();
         }
 
         private void ConfigureRoutes(DotvvmConfiguration config, string applicationPath)
