@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Altairis.VtipBaze.Data;
 using DotVVM.Framework.Hosting;
+using Microsoft.EntityFrameworkCore;
 
 namespace Altairis.VtipBaze.WebCore.Handlers
 {
@@ -41,7 +42,7 @@ namespace Altairis.VtipBaze.WebCore.Handlers
         {
             using (var dc = new VtipBazeContext())
             {
-                foreach (var j in dc.Jokes.Where(x => x.Approved).OrderByDescending(x => x.DateCreated).Take(10))
+                foreach (var j in dc.Jokes.Include(j => j.Tags).Where(x => x.Approved).OrderByDescending(x => x.DateCreated).Take(10))
                 {
                     var itemUri = new UriBuilder(baseUri);
                     itemUri.Path = "/joke/" + j.JokeId;
