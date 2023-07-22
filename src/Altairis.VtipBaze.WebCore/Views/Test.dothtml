@@ -1,0 +1,28 @@
+﻿@viewModel Altairis.VtipBaze.WebCore.ViewModels.TestViewModel, Altairis.VtipBaze.WebCore
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <h1>Hello from DotVVM</h1>
+
+    <p>
+        <dot:TextBox Text="{value: Number1}" />
+        +
+        <dot:TextBox Text="{value: Number2}" />
+        =
+        {{value: Result}}
+    </p>
+    <p>
+        <dot:Button Text="Calculate" Click="{command: Calculate()}" />
+    </p>
+
+</body>
+</html>
+
+
