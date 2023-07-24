@@ -224,6 +224,7 @@
     </Compile>
     <Compile Include="Handlers\FeedHandler.cs" />
     <Compile Include="Handlers\TagListHandler.cs" />
+    <Compile Include="Helpers.cs" />
     <Compile Include="Model\TagListModel.cs" />
     <Compile Include="Pages\HomePage.aspx.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
@@ -262,6 +263,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\NewJokeViewModel.cs" />
     <Compile Include="ViewModels\SiteViewModel.cs" />
     <Compile Include="ViewModels\TagListViewModel.cs" />
   </ItemGroup>
@@ -307,6 +309,7 @@
     <None Include="Scripts\_references.js" />
     <Content Include="Views\Site.dotmaster" />
     <Content Include="Views\TagList.dothtml" />
+    <Content Include="Views\NewJoke.dothtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Themes\Default\SkinFile.skin" />

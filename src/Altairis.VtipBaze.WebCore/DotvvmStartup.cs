@@ -1,6 +1,7 @@
 using Altairis.VtipBaze.Data;
 using DotVVM.Adapters.WebForms;
 using DotVVM.Framework.Configuration;
+using DotVVM.Framework.Controls;
 using DotVVM.Framework.ResourceManagement;
 using DotVVM.Framework.Routing;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,12 +18,16 @@ namespace Altairis.VtipBaze.WebCore
             ConfigureRoutes(config, applicationPath);
             ConfigureControls(config, applicationPath);
             ConfigureResources(config, applicationPath);
+
+            config.Styles.Register<Button>().AddClass("button");
+            config.Styles.Register<TextBox>().AddClass("textbox");
         }
 
         private void ConfigureRoutes(DotvvmConfiguration config, string applicationPath)
         {
             // register routes   
             config.RouteTable.Add("TagList", "tags", "Views/TagList.dothtml");  
+            config.RouteTable.Add("NewJoke", "new", "Views/NewJoke.dothtml");  
         }
 
         private void ConfigureControls(DotvvmConfiguration config, string applicationPath)
