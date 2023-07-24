@@ -64,14 +64,17 @@
     <Reference Include="ColorCode">
       <HintPath>..\packages\ColorCode.1.0.1\lib\ColorCode.dll</HintPath>
     </Reference>
-    <Reference Include="DotVVM.Core, Version=4.1.0.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotVVM.Core.4.1.0\lib\net472\DotVVM.Core.dll</HintPath>
+    <Reference Include="DotVVM.Adapters.WebForms, Version=4.2.0.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotVVM.Adapters.WebForms.4.2.0-preview04-5554570822\lib\net472\DotVVM.Adapters.WebForms.dll</HintPath>
     </Reference>
-    <Reference Include="DotVVM.Framework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotVVM.4.1.0\lib\net472\DotVVM.Framework.dll</HintPath>
+    <Reference Include="DotVVM.Core, Version=4.2.0.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotVVM.Core.4.2.0-preview04-5554570822\lib\net472\DotVVM.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DotVVM.Framework.Hosting.Owin, Version=4.1.0.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotVVM.Owin.4.1.0\lib\net472\DotVVM.Framework.Hosting.Owin.dll</HintPath>
+    <Reference Include="DotVVM.Framework, Version=4.2.0.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotVVM.4.2.0-preview04-5554570822\lib\net472\DotVVM.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="DotVVM.Framework.Hosting.Owin, Version=4.2.0.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotVVM.Owin.4.2.0-preview04-5554570822\lib\net472\DotVVM.Framework.Hosting.Owin.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -80,8 +83,8 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.0.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="FastExpressionCompiler, Version=3.2.1.0, Culture=neutral, PublicKeyToken=dfbf2bd50fcf7768, processorArchitecture=MSIL">
-      <HintPath>..\packages\FastExpressionCompiler.3.2.1\lib\net45\FastExpressionCompiler.dll</HintPath>
+    <Reference Include="FastExpressionCompiler, Version=3.3.3.0, Culture=neutral, PublicKeyToken=dfbf2bd50fcf7768, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastExpressionCompiler.3.3.3\lib\net45\FastExpressionCompiler.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.DotNet.PlatformAbstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
@@ -157,6 +160,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.0\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -170,8 +176,8 @@
       <HintPath>..\packages\System.Reflection.Metadata.5.0.0\lib\net461\System.Reflection.Metadata.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Security" />
     <Reference Include="System.Security.Claims, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -255,6 +261,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\SiteViewModel.cs" />
     <Compile Include="ViewModels\TestViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -297,6 +304,7 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <None Include="Scripts\_references.js" />
+    <Content Include="Views\Site.dotmaster" />
     <Content Include="Views\Test.dothtml" />
   </ItemGroup>
   <ItemGroup>
@@ -330,10 +338,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\DotVVM.4.1.0\analyzers\dotnet\cs\DotVVM.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\DotVVM.4.1.0\analyzers\dotnet\cs\DotVVM.Analyzers.dll" />
+    <Analyzer Include="..\packages\DotVVM.4.2.0-preview04-5554570822\analyzers\dotnet\cs\DotVVM.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\DotVVM.4.2.0-preview04-5554570822\analyzers\dotnet\cs\DotVVM.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

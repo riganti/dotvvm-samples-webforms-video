@@ -8,19 +8,9 @@ using DotVVM.Framework.Hosting;
 
 namespace Altairis.VtipBaze.WebCore.ViewModels
 {
-    public class TestViewModel : DotvvmViewModelBase
+    public class TestViewModel : SiteViewModel
     {
-
-        public int Number1 { get; set; }
-
-        public int Number2 { get; set; }
-
-        public int Result { get; set; }
-
-        public void Calculate()
-        {
-            Result = Number1 + Number2;
-        }
+        public override string PageTitle => "Test";
     }
 }
 
