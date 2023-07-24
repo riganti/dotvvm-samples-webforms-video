@@ -224,6 +224,7 @@
     </Compile>
     <Compile Include="Handlers\FeedHandler.cs" />
     <Compile Include="Handlers\TagListHandler.cs" />
+    <Compile Include="Model\TagListModel.cs" />
     <Compile Include="Pages\HomePage.aspx.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -262,7 +263,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\SiteViewModel.cs" />
-    <Compile Include="ViewModels\TestViewModel.cs" />
+    <Compile Include="ViewModels\TagListViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -305,7 +306,7 @@
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <None Include="Scripts\_references.js" />
     <Content Include="Views\Site.dotmaster" />
-    <Content Include="Views\Test.dothtml" />
+    <Content Include="Views\TagList.dothtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Themes\Default\SkinFile.skin" />
@@ -341,6 +342,7 @@
     <Analyzer Include="..\packages\DotVVM.4.2.0-preview04-5554570822\analyzers\dotnet\cs\DotVVM.Analyzers.CodeFixes.dll" />
     <Analyzer Include="..\packages\DotVVM.4.2.0-preview04-5554570822\analyzers\dotnet\cs\DotVVM.Analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

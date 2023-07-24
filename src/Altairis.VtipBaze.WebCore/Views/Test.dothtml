@@ -1,8 +1,0 @@
-﻿@viewModel Altairis.VtipBaze.WebCore.ViewModels.TestViewModel, Altairis.VtipBaze.WebCore
-@masterPage Views/Site.dotmaster
-
-<dot:Content ContentPlaceHolderID="MainContent">
-
-
-</dot:Content>
-
