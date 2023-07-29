@@ -6,6 +6,7 @@
     $(".paging a").button();
     $(".button").button();
     $(".aspNetDisabled").addClass("ui-state-disabled");
+    $("a[disabled=true]").addClass("ui-state-disabled");
 
     // Click confirmation
     $("*[data-confirmprompt]").click(function () {
