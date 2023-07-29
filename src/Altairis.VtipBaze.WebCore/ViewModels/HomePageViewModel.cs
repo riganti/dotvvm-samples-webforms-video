@@ -8,6 +8,7 @@ using DotVVM.Framework.Hosting;
 using DotVVM.Framework.Controls;
 using Altairis.VtipBaze.WebCore.Model;
 using Altairis.VtipBaze.Data;
+using System.Web.UI;
 
 namespace Altairis.VtipBaze.WebCore.ViewModels
 {
@@ -40,8 +41,8 @@ namespace Altairis.VtipBaze.WebCore.ViewModels
         {
             Jokes = new GridViewDataSet<JokeListModel>()
             {
-                PagingOptions = 
-                { 
+                PagingOptions =
+                {
                     PageSize = 6,
                     PageIndex = CurrentPageIndex - 1
                 }
@@ -81,11 +82,47 @@ namespace Altairis.VtipBaze.WebCore.ViewModels
                     Id = x.JokeId,
                     Text = x.Text,
                     DateCreated = x.DateCreated,
+                    Approved = x.Approved,
                     Tags = x.Tags.Select(t => new TagListModel()
                     {
                         TagName = t.TagName
                     })
                 });
+        }
+
+        public void ApproveJoke(int jokeId)
+        {
+            var joke = dbContext.Jokes.Single(x => x.JokeId == jokeId);
+            joke.Approved = true;
+            dbContext.SaveChanges();
+        }
+
+        public void RejectJoke(int jokeId)
+        {
+            var joke = dbContext.Jokes.Single(x => x.JokeId == jokeId);
+            dbContext.Jokes.Remove(joke);
+            dbContext.SaveChanges();
+        }
+
+        public void AddTag(int jokeId, string adminNewTag)
+        {
+            var tagText = adminNewTag.Trim().ToLower();
+            if (string.IsNullOrWhiteSpace(tagText)) return;
+
+            var tag = dbContext.Tags.SingleOrDefault(x => x.TagName.Equals(tagText));
+            if (tag == null) tag = dbContext.Tags.Add(new Tag { TagName = tagText });
+
+            var joke = dbContext.Jokes.Single(x => x.JokeId == jokeId);
+            joke.Tags.Add(tag);
+
+            dbContext.SaveChanges();
+        }
+
+        public void ClearTags(int jokeId)
+        {
+            var joke = dbContext.Jokes.Single(x => x.JokeId == jokeId);
+            joke.Tags.Clear();
+            dbContext.SaveChanges();
         }
     }
 }

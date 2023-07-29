@@ -12,5 +12,7 @@ namespace Altairis.VtipBaze.WebCore.Model
         public string Text { get; set; }
         public DateTime DateCreated { get; set; }
         public IEnumerable<TagListModel> Tags { get; set; }
+        public bool Approved { get; set; }
+        public string AdminNewTag { get; set; }
     }
 }

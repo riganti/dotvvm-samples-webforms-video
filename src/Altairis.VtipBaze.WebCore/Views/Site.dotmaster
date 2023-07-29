@@ -13,6 +13,7 @@
 
     <dot:RequiredResource Name="site" />
     <dot:RequiredResource Name="site-css" />
+    <dot:RequiredResource Name="globalize" />
 </head>
 <body>
 
