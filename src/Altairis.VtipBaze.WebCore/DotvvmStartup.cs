@@ -1,4 +1,5 @@
 using Altairis.VtipBaze.Data;
+using Altairis.VtipBaze.WebCore.Handlers;
 using DotVVM.Adapters.WebForms;
 using DotVVM.Framework.Configuration;
 using DotVVM.Framework.Controls;
@@ -36,6 +37,7 @@ namespace Altairis.VtipBaze.WebCore
         
             config.RouteTable.Add("Login", "login", "Views/Login.dothtml");
 
+            config.RouteTable.Add("Feed", "feed.xml", presenterType: typeof(FeedPresenter));
         }
 
         private void ConfigureControls(DotvvmConfiguration config, string applicationPath)
@@ -59,6 +61,7 @@ namespace Altairis.VtipBaze.WebCore
             options.AddDefaultTempStorages("temp");
 
             options.Services.AddScoped<VtipBazeContext>();
+            options.Services.AddScoped<FeedPresenter>();
 		}
     }
 }

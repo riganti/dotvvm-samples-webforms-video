@@ -223,6 +223,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Handlers\FeedHandler.cs" />
+    <Compile Include="Handlers\FeedPresenter.cs" />
     <Compile Include="Handlers\TagListHandler.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Model\JokeListModel.cs" />
