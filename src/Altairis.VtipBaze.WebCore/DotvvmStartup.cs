@@ -33,6 +33,9 @@ namespace Altairis.VtipBaze.WebCore
             config.RouteTable.Add("SingleJoke", "joke/{JokeId}", "Views/HomePage.dothtml");
             config.RouteTable.Add("TagSearch", "tags/{TagName}/{PageIndex:int}", "Views/HomePage.dothtml", new { PageIndex = 1 });
             config.RouteTable.Add("AdminHomePage", "admin/{PageIndex:int}", "Views/HomePage.dothtml", new { PageIndex = 1 });
+        
+            config.RouteTable.Add("Login", "login", "Views/Login.dothtml");
+
         }
 
         private void ConfigureControls(DotvvmConfiguration config, string applicationPath)
