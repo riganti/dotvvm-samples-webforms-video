@@ -54,7 +54,7 @@ namespace Altairis.VtipBaze.WebCore.ViewModels
                 var message = new System.Net.Mail.MailMessage()
                 {
                     Subject = "New joke to approve",
-                    Body = joke.Text + "\r\n\r\nApprove or reject at " + Helpers.GetApplicationBaseUri() + "admin",
+                    Body = joke.Text + "\r\n\r\nApprove or reject at " + Context.GetApplicationBaseUri() + "admin",
                     IsBodyHtml = false
                 };
                 message.To.Add(string.Join(",", recipients));

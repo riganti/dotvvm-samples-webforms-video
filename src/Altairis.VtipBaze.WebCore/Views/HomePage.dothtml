@@ -49,8 +49,8 @@
                     <dot:AuthenticatedView>
                         <AuthenticatedTemplate>
                             <form style="float: right">
-                                <dot:TextBox style-width="120px" class="textbox ac-tag" 
-                                             Text="{value: AdminNewTag}"/>
+                                <dot:TextBox style-width="120px" class="textbox" 
+                                             Text="{value: AdminNewTag}" list="TagList"/>
                                 <dot:LinkButton Text="[add]"
                                                 title="Add tag"
                                                 Click="{command: _root.AddTag(Id, AdminNewTag)}"
@@ -97,6 +97,10 @@
                                   Text="last &gt;&gt;" 
                                   disabled="{value: Jokes.PagingOptions.IsLastPage}"/>
     </div>
+
+    <dot:Repeater ID="TagList" WrapperTagName="datalist" DataSource="{value: TagNames}">
+        <option value="{value: _this}"></option>
+    </dot:Repeater>
 
 </dot:Content>
 

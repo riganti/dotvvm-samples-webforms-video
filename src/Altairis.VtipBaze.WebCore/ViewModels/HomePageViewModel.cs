@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using DotVVM.Framework.ViewModel;
-using DotVVM.Framework.Hosting;
 using DotVVM.Framework.Controls;
 using Altairis.VtipBaze.WebCore.Model;
 using Altairis.VtipBaze.Data;
-using System.Web.UI;
 
 namespace Altairis.VtipBaze.WebCore.ViewModels
 {
@@ -32,6 +28,8 @@ namespace Altairis.VtipBaze.WebCore.ViewModels
         [FromRoute("TagName")]
         public string TagName { get; set; }
 
+        public List<string> TagNames { get; set; }
+
         public HomePageViewModel(VtipBazeContext dbContext)
         {
             this.dbContext = dbContext;
@@ -49,7 +47,16 @@ namespace Altairis.VtipBaze.WebCore.ViewModels
             };
             Jokes.LoadFromQueryable(SelectJokes());
 
+            TagNames = SelectTags().ToList();
+
             return base.PreRender();
+        }
+
+        public IQueryable<string> SelectTags()
+        {
+            return dbContext.Tags
+                .OrderBy(x => x.TagName)
+                .Select(x => x.TagName);
         }
 
         public IQueryable<JokeListModel> SelectJokes()
@@ -124,6 +131,7 @@ namespace Altairis.VtipBaze.WebCore.ViewModels
             joke.Tags.Clear();
             dbContext.SaveChanges();
         }
+
     }
 }
 

@@ -1,19 +1,23 @@
-﻿using Altairis.Web;
+﻿using DotVVM.Framework.Hosting;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Web;
 
 namespace Altairis.VtipBaze.WebCore
 {
-    public class Helpers
+    public static class Helpers
     {
 
-        public static Uri GetApplicationBaseUri()
+        public static Uri GetApplicationBaseUri(this IDotvvmRequestContext context)
         {
-            return HttpContext.Current.Request.ApplicationBaseUri();
+            var uriBuilder = new UriBuilder(context.HttpContext.Request.Url);
+            uriBuilder.Path = context.HttpContext.Request.PathBase.Value;
+            uriBuilder.Query = string.Empty;
+            uriBuilder.Fragment = string.Empty;
+            if (!uriBuilder.Path.EndsWith("/"))
+            {
+                uriBuilder.Path += "/";
+            }
+
+            return uriBuilder.Uri;
         }
 
     }

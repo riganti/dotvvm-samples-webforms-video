@@ -25,7 +25,7 @@ namespace Altairis.VtipBaze.WebCore.Handlers
             context.HttpContext.Response.Headers["Cache-Control"] = "private";
             context.HttpContext.Response.Headers["Expires"] = DateTime.UtcNow.AddMonths(1).ToString("R");
 
-            var baseUri = Helpers.GetApplicationBaseUri();
+            var baseUri = context.GetApplicationBaseUri();
             var feed = new SyndicationFeed
             {
                 Id = baseUri.ToString(),

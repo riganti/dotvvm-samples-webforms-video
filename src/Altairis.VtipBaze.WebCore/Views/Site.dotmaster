@@ -21,7 +21,7 @@
         <div>
             <b>VTIP</b>BÁZE<span>.CZ</span>
         </div>
-        <nav class="ui-widget-header ui-corner-all">
+        <nav class="ui-widget-header ui-corner-all" RenderSettings.Mode="Server">
             <webforms:HybridRouteLink RouteName="HomePage" Param-PageIndex="1" Text="Newest" />
             <webforms:HybridRouteLink RouteName="TagList" Text="Tags" />
             <webforms:HybridRouteLink RouteName="NewJoke" Text="Add your own" />
