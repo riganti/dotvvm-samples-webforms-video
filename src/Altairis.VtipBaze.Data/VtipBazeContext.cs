@@ -23,7 +23,7 @@ namespace Altairis.VtipBaze.Data
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS; Integrated Security=True; Initial Catalog=VtipBaze; MultipleActiveResultSets=True; Trust Server Certificate=true");
+                optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS; Integrated Security=True; Initial Catalog=VtipBazeMigrated; MultipleActiveResultSets=True; Trust Server Certificate=true");
             }
             base.OnConfiguring(optionsBuilder);
         }
