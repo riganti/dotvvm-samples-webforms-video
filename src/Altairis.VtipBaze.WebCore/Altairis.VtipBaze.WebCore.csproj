@@ -65,16 +65,16 @@
       <HintPath>..\packages\ColorCode.1.0.1\lib\ColorCode.dll</HintPath>
     </Reference>
     <Reference Include="DotVVM.Adapters.WebForms, Version=4.2.0.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotVVM.Adapters.WebForms.4.2.0-preview04-5554570822\lib\net472\DotVVM.Adapters.WebForms.dll</HintPath>
+      <HintPath>..\packages\DotVVM.Adapters.WebForms.4.2.0\lib\net472\DotVVM.Adapters.WebForms.dll</HintPath>
     </Reference>
-    <Reference Include="DotVVM.Core, Version=4.2.0.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotVVM.Core.4.2.0-preview04-5554570822\lib\net472\DotVVM.Core.dll</HintPath>
+    <Reference Include="DotVVM.Core, Version=4.2.1.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotVVM.Core.4.2.1\lib\net472\DotVVM.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DotVVM.Framework, Version=4.2.0.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotVVM.4.2.0-preview04-5554570822\lib\net472\DotVVM.Framework.dll</HintPath>
+    <Reference Include="DotVVM.Framework, Version=4.2.1.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotVVM.4.2.1\lib\net472\DotVVM.Framework.dll</HintPath>
     </Reference>
     <Reference Include="DotVVM.Framework.Hosting.Owin, Version=4.2.0.0, Culture=neutral, PublicKeyToken=23f3607db32275da, processorArchitecture=MSIL">
-      <HintPath>..\packages\DotVVM.Owin.4.2.0-preview04-5554570822\lib\net472\DotVVM.Framework.Hosting.Owin.dll</HintPath>
+      <HintPath>..\packages\DotVVM.Owin.4.2.0\lib\net472\DotVVM.Framework.Hosting.Owin.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -348,10 +348,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\DotVVM.4.2.0-preview04-5554570822\analyzers\dotnet\cs\DotVVM.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\DotVVM.4.2.0-preview04-5554570822\analyzers\dotnet\cs\DotVVM.Analyzers.dll" />
+    <Analyzer Include="..\packages\DotVVM.4.2.1\analyzers\dotnet\cs\DotVVM.Analyzers.CodeFixes.dll" />
+    <Analyzer Include="..\packages\DotVVM.4.2.1\analyzers\dotnet\cs\DotVVM.Analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
